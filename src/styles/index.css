@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+:root {
+  --black: #0D0A0B;
+  --charcoal: #454955;
+  --magnolia: #F3EFF5;
+  --ltgreen: #72B01D;
+  --dkgreen: #3F7D20;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--magnolia)
+}

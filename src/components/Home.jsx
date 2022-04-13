@@ -1,11 +1,10 @@
-import React from 'react';
+import React from "react";
+import { useState } from "react";
+import Firebase from "../firebase";
+useState
 
 const Home = () => {
-    return (
-        <div>
-            This is the home
-        </div>
-    );
+  return <div>This is the home</div>;
 };
 
 export default Home;

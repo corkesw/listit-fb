@@ -1,0 +1,7 @@
+.banner {
+    font-size: large;
+    color: var(--ltgreen);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -6,28 +6,32 @@ import {
   signOut,
 } from "firebase/auth";
 import { UserContext } from "../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
+import "../styles/login.css";
 
 const auth = getAuth();
 
 const Login = () => {
   const { user, setUser } = useContext(UserContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [remail, setREmail] = useState("");
-  const [rpassword, setRPassword] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [signUpEmail, setSignUpEmail] = useState("");
+  const [signUpPassword, setsignUpPassword] = useState("");
   const [loginErr, setLoginErr] = useState(false);
   const [signUpErr, setSignUpErr] = useState(false);
-  console.log(remail, rpassword);
-  console.log(user);
+  const navigate = useNavigate();
 
   const login = (e) => {
     e.preventDefault();
     setLoginErr(false);
-    signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, loginEmail, loginPassword)
       .then((userCredential) => {
         const email = userCredential.user.email;
         const uid = userCredential.user.uid;
         setUser({ email, uid });
+        setLoginEmail("");
+        setLoginPassword("");
+        navigate("/");
       })
       .catch(() => setLoginErr(true));
   };
@@ -35,7 +39,7 @@ const Login = () => {
   const register = (e) => {
     e.preventDefault();
     setSignUpErr(false);
-    createUserWithEmailAndPassword(auth, remail, rpassword)
+    createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
       .then((userCredential) => {
         const email = userCredential.user.email;
         const uid = userCredential.user.uid;
@@ -54,53 +58,63 @@ const Login = () => {
   return (
     <>
       {user ? (
-        <div>
-          <h1>Logout</h1>
-          <button onClick={logOut}>Logout</button>
+        <div className="login">
+          <p className="loghead" onClick={logOut}>
+            Logout
+          </p>
         </div>
       ) : (
-        <div>
-          <h1>Login</h1>
-          <form onSubmit={login}>
-            <label htmlFor="email">email</label>
+        <div className="div wrapper">
+          <h1 className="header">Login</h1>
+          <form className="form-login" onSubmit={login}>
+            <label className="form-item" htmlFor="email">
+              Email
+            </label>
             <input
+              className="form-item"
               id="email"
-              value={email}
+              value={loginEmail}
               onChange={(e) => {
-                setEmail(e.target.value);
+                setLoginEmail(e.target.value);
               }}
             />
-            <label htmlFor="password">Password</label>
+            <label className="form-item" htmlFor="password">
+              Password
+            </label>
             <input
+              className="form-item"
               id="password"
-              value={password}
+              value={loginPassword}
               onChange={(e) => {
-                setPassword(e.target.value);
+                setLoginPassword(e.target.value);
               }}
             />
-            <button>Submit</button>
+            <span></span>
+            <button className="form-item">Submit</button>
           </form>
           {loginErr ? <p>something went wrong</p> : <p>All good!</p>}
 
-          <h1>Sign Up</h1>
-          <form onSubmit={register}>
-            <label htmlFor="remail">email</label>
-            <input
-              id="remail"
-              value={remail}
+          <h1 className="header">Sign Up</h1>
+          <form className="form-login" onSubmit={register}>
+            <label className="form-item" htmlFor="signUpEmail">Email</label>
+            <input className="form-item"
+              id="signUpEmail"
+              value={signUpEmail}
               onChange={(e) => {
-                setREmail(e.target.value);
+                setSignUpEmail(e.target.value);
               }}
             />
-            <label htmlFor="rpassword">Password</label>
+            <label className="form-item" htmlFor="signUpPassword">Password</label>
             <input
-              id="rpassword"
-              value={rpassword}
+            className="form-item"
+              id="signUpPassword"
+              value={signUpPassword}
               onChange={(e) => {
-                setRPassword(e.target.value);
+                setSignUpPassword(e.target.value);
               }}
             />
-            <button>Submit</button>
+            <span></span>
+            <button className="form-item">Submit</button>
           </form>
           {signUpErr ? <p>something went wrong</p> : <p>All good!</p>}
         </div>

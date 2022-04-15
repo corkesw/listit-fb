@@ -1,0 +1,21 @@
+.wrapper {
+    padding-left:12px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: 100;
+}
+
+.form-login {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.form-item {
+    margin: 5px
+}

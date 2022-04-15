@@ -1,20 +1,45 @@
-import React, { useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Create from "./components/editor/Create";
+import Editor from "./components/editor/Editor";
 import Header from "./components/Header";
 import Home from "./components/Home";
+import Lists from "./components/Lists";
 import Login from "./components/Login";
+import Nav from "./components/Nav";
 import { UserContext } from "./contexts/UserContext";
+const auth = getAuth();
 
 const App = () => {
+  const auth = getAuth();
   const [user, setUser] = useState(null);
+  const [viewMenu, setViewMenu] = useState(false);
+  if (user) console.log(user.email)
+  else console.log('no user')
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const email = user.email;
+        const uid = user.uid;
+        setUser({ email, uid });
+      }
+    });
+  }, []);
+
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
-        <Header />
+        <Nav viewMenu={viewMenu} setViewMenu={setViewMenu} />
+        <Header viewMenu={viewMenu} setViewMenu={setViewMenu} />
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/lists" element={<Lists />} />
+          <Route path="/editor" element={<Editor />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/" element={<Home />} />
         </Routes>
-        <Home />
       </BrowserRouter>
     </UserContext.Provider>
   );

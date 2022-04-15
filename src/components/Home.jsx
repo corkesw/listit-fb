@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import Firebase from "../firebase";
+import {app} from "../firebase";
 useState
 
 const Home = () => {

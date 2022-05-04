@@ -4,7 +4,7 @@ import {app} from "../firebase";
 useState
 
 const Home = () => {
-  return <div>This is the home</div>;
+  return <div className="content__wrapper">This is the home</div>;
 };
 
 export default Home;

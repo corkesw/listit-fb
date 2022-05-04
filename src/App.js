@@ -5,7 +5,8 @@ import Create from "./components/editor/Create";
 import Editor from "./components/editor/Editor";
 import Header from "./components/Header";
 import Home from "./components/Home";
-import Lists from "./components/Lists";
+import Lists from "./components/lists/Lists";
+import ViewSelectedList from "./components/lists/ViewSelectedList";
 import Login from "./components/Login";
 import Nav from "./components/Nav";
 import { UserContext } from "./contexts/UserContext";
@@ -36,6 +37,7 @@ const App = () => {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/lists" element={<Lists />} />
+          <Route path='/lists/:listId' element={<ViewSelectedList />} />
           <Route path="/editor" element={<Editor />} />
           <Route path="/create" element={<Create />} />
           <Route path="/" element={<Home />} />

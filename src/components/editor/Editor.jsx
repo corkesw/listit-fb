@@ -7,7 +7,8 @@ const Editor = () => {
     navigate(`${path}`);
   };
   return (
-    <div>
+    <div className="content__wrapper">
+      <p>Editor Landing Page</p>
       <span
         onClick={() => {
           move("/create");
